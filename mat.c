@@ -37,7 +37,8 @@ Mat* RGB2Gray(Mat* image){
     U8* gray_pointer = gray->buffer;
     RGB* color_pointer = (RGB*)image->buffer;
 
-    for(int i=0; i<gray->height*gray->width; i++){
+    int i;
+    for(i=0; i<gray->height*gray->width; i++){
         *gray_pointer = (color_pointer->B + color_pointer->G + color_pointer->R)/3;
         gray_pointer++;
         color_pointer++;
@@ -53,8 +54,9 @@ Mat* expand_image(Mat* image, U8 padding){
     if(image->bytes == Uchar){
         new_image = init_mat(height, width,0, Uchar);
         U8* to;
-        for(int row = 0; row<image->height; row++){
-            for(int col = 0; col < image->width; col++){
+        int row, col;
+        for(row = 0; row<image->height; row++){
+            for(col = 0; col < image->width; col++){
                 to = (float*)locate(new_image, row+padding, col+padding);
                 U8* from = (U8*)locate(image, row, col);
                 *to = *from;
@@ -65,8 +67,9 @@ Mat* expand_image(Mat* image, U8 padding){
         new_image = init_mat(height, width,0, Float);
         float* to;
         float* from;
-        for(int row = 0; row<image->height; row++){
-            for(int col = 0; col < image->width; col++){
+        int row, col;
+        for(row = 0; row<image->height; row++){
+            for(col = 0; col < image->width; col++){
                 to = (float*)locate(new_image, row+padding, col+padding);
                 from = (float*)locate(image, row, col);
                 //*to = *from;
@@ -86,8 +89,9 @@ float dot(Mat* image, Mat* patch,U16 row, U16 col){
     float dot_sum = 0;
     U8 kernal = patch->height;
 
-    for(int i=0; i< patch->height; i++){
-        for(int j=0;j<patch->width;j++){
+    int i, j;
+    for(i=0; i< patch->height; i++){
+        for(j=0;j<patch->width;j++){
             src1 = locate(image,row - kernal/2 + i,col- kernal/2 + j);
             src2 = locate(patch,i,j);
             dot_sum = dot_sum + (*src1)*(*src2);
@@ -117,9 +121,10 @@ Mat* conv(Mat* image, Mat* patch, U8 stride, U8 padding){
     //expand the image
     Mat* big_image = expand_image(image, padding);
 
-    int col = 0;
+    int row, col = 0;
     float* pointer = new_image->buffer;
-    for(int row=kernal_size/2;row < big_image->height - kernal_size/2; row = row + stride){
+
+    for(row=kernal_size/2;row < big_image->height - kernal_size/2; row = row + stride){
         for(col = kernal_size/2; col < big_image->width - kernal_size/2; col = col + stride){
             float res = dot(big_image, patch, row,col);
             *pointer = res;
@@ -148,8 +153,9 @@ Mat* image_sub(Mat* mat1, Mat* mat2){
 
     Mat* new_image = init_mat(mat1->height, mat1->width, 0, mat1->bytes);
     if(mat1->bytes == 1){
-        for(int row=0; row< mat1->height; row++){
-            for(int col=0; col<mat1->width; col++){
+        int row, col;
+        for(row=0; row< mat1->height; row++){
+            for(col=0; col<mat1->width; col++){
                 U8* sub1 = locate(mat1, row, col);
                 U8* sub2 = locate(mat2, row, col);
                 U8* to = locate(new_image, row, col);
@@ -158,8 +164,9 @@ Mat* image_sub(Mat* mat1, Mat* mat2){
         }
     }
     else if(mat1->bytes == 4){
-        for(int row=0; row< mat1->height; row++){
-            for(int col=0; col<mat1->width; col++){
+        int row, col;
+        for(row=0; row< mat1->height; row++){
+            for(col=0; col<mat1->width; col++){
                 float* sub1 = locate(mat1, row, col);
                 float* sub2 = locate(mat2, row, col);
                 float* to = locate(new_image, row, col);
@@ -181,8 +188,9 @@ Mat* uchar2float(Mat* uchar_image){
 
     float* to = (float*)float_image->buffer;
     U8* from = (U8*)uchar_image->buffer;
-    for(U16 i=0;i<height; i++){
-        for(U16 j=0; j< width;j++){
+    U16 i, j;
+    for(i=0;i<height; i++){
+        for(j=0; j< width;j++){
             to = locate(float_image,i,j);
             from = locate(uchar_image,i,j);
 
@@ -206,8 +214,9 @@ Mat* float2uchar(Mat* float_image){
 
     U8* to;
     float* from;
-    for(int i=0;i<height; i++){
-        for(int j=0; j< width;j++){
+    int i, j;
+    for(i=0;i<height; i++){
+        for(j=0; j< width;j++){
             to = locate(uchar_image,i,j);
             from = locate(float_image,i,j);
             *to = MAX(MIN(*from,255),0);
@@ -219,8 +228,9 @@ Mat* float2uchar(Mat* float_image){
 void mat_abs(Mat* float_image){
     U16 height = float_image->height;
     U16 width = float_image->width;
-    for(int row=0;row<height; row++){
-        for(int col=0; col< width;col++){
+    int row, col;
+    for(row=0;row<height; row++){
+        for(col=0; col< width;col++){
             float* pointer = locate(float_image,row,col);
             *pointer = ABS(*pointer);
         }
@@ -232,8 +242,9 @@ void normalize_image(Mat* image){
     U16 width = image->width;
     float max = -5000;
     float min = 5000;
-    for(int row=0;row<height; row++){
-        for(int col=0; col< width;col++){
+    int row, col;
+    for(row=0;row<height; row++){
+        for(col=0; col< width;col++){
             float* pointer = locate(image,row,col);
 
             if(*pointer > max)
@@ -243,8 +254,8 @@ void normalize_image(Mat* image){
         }
     }
 
-    for(int row=0;row<height; row++){
-        for(int col=0; col< width;col++){
+    for(row=0;row<height; row++){
+        for(col=0; col< width;col++){
             float* pointer = locate(image,row,col);
             *pointer = 255*(*pointer - min)/(max - min);
         }
@@ -255,8 +266,9 @@ void print_mat(Mat* mat){
     U16 height = mat->height;
     U16 width = mat->width;
  printf("\n\n");
-    for(int row=0;row<height; row++){
-        for(int col=0; col< width;col++){
+    int row, col;
+    for(row=0;row<height; row++){
+        for(col=0; col< width;col++){
             float* pointer = locate(mat,row,col);
             printf("%f \t",*pointer);
         }

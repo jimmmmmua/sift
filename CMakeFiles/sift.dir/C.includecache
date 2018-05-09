@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/likewise-open/SENSETIME/xumingchao/Documents/experiments/cv_homework/sift/sift.c
+mat.h
+/home/likewise-open/SENSETIME/xumingchao/Documents/experiments/cv_homework/sift/mat.h
+math.h
+-
+sift.h
+/home/likewise-open/SENSETIME/xumingchao/Documents/experiments/cv_homework/sift/sift.h
+stdio.h
+-
+stdbool.h
+-
+bmp.h
+/home/likewise-open/SENSETIME/xumingchao/Documents/experiments/cv_homework/sift/bmp.h
+
+header/bmp.h
+mat.h
+header/mat.h
+
+header/mat.h
+type.h
+header/type.h
+
+header/sift.h
+type.h
+header/type.h
+
+header/type.h
+stdlib.h
+-
+

@@ -1,0 +1,1 @@
+/home/likewise-open/SENSETIME/xumingchao/Documents/experiments/cv_homework/sift/CMakeFiles/sift.dir

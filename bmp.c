@@ -83,8 +83,9 @@ Mat* four_byte(Mat* image){
             Mat* new_image = init_mat(height, width, 0, image->bytes);
             U8* old_pointer = image->buffer;
 
-            for(int row = 0; row<height; row++){
-                for(int col = width - image->width; col < width; col++){
+            int row, col;
+            for(row = 0; row<height; row++){
+                for(col = width - image->width; col < width; col++){
                     U8* to = locate(new_image, row, col);
                     *to = *old_pointer;
                     old_pointer++;
@@ -105,8 +106,9 @@ Mat* four_byte(Mat* image){
             Mat* new_image = init_mat(height, width, 0, image->bytes);
             RGB* old_pointer = image->buffer;
 
-            for(int row = 0; row<height; row++){
-                for(int col = width - image->width; col < width; col++){
+            int row, col;
+            for(row = 0; row<height; row++){
+                for(col = width - image->width; col < width; col++){
                     RGB* to = locate(new_image, row, col);
                     *to = *old_pointer;
                     old_pointer++;
@@ -154,7 +156,8 @@ int write_bmp(Mat* image, char* path){
     //for gray image we need to write the Palette
     if(image->channels != 3){
         RGBQUAD* palette = malloc(sizeof(RGBQUAD)*256);
-        for(int i =0; i<256;i++){
+        int i;
+        for(i =0; i<256;i++){
             palette[i].B = i;
             palette[i].G = i;
             palette[i].R = i;
