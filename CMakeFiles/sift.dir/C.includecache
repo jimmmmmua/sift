@@ -6,25 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/likewise-open/SENSETIME/xumingchao/Documents/experiments/cv_homework/sift/main.c
-bmp.h
-/home/likewise-open/SENSETIME/xumingchao/Documents/experiments/cv_homework/sift/bmp.h
-sift.h
-/home/likewise-open/SENSETIME/xumingchao/Documents/experiments/cv_homework/sift/sift.h
+/home/likewise-open/SENSETIME/xumingchao/Documents/experiments/cv_homework/sift/jpeg.c
+jpeg.h
+/home/likewise-open/SENSETIME/xumingchao/Documents/experiments/cv_homework/sift/jpeg.h
 
-header/bmp.h
-mat.h
-header/mat.h
-
-header/mat.h
-type.h
-header/type.h
-
-header/sift.h
-type.h
-header/type.h
-
-header/type.h
-stdlib.h
--
+header/jpeg.h
 

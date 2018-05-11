@@ -2,14 +2,36 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "bmp.h"
+#include "jpg.h"
 #include "mat.h"
 
+typedef struct BmpHeader
+{
+    //bmp header
+    //U8  Signatue[2] ;   // B  M
+    U32 FileSize; //size of the file
+    U16 Reserv1;
+    U16 Reserv2;
+    U32 FileOffset; //place where the image begin
+
+    //DIB header
+    U32 DIBHeaderSize; //size of the DIB header
+    U32 ImageWidth;    //width of the image
+    U32 ImageHight;    //height of the image
+    U16 Planes;
+    U16 BPP; //the bits of every Pixels
+    U32 Compression;
+    U32 ImageSize; //size of the image
+    U32 XPPM;
+    U32 YPPM;
+    U32 CCT;
+    U32 ICC;
+} BmpHeader;
 
 typedef struct JpgHeader
 {
     //bmp header
-    //U8  Signatue[2] ;   // marker
+    U16  SOI ;   // marker
     U16 APP0          ;     //APP0(JFIF application segment)
     U16 HeaderLength  ;     //size of the header without marker
     U8  Identifier[5] ; //"JFIF\0"
@@ -23,7 +45,24 @@ typedef struct JpgHeader
     U8  Ythumbnail    ;  //缩略图垂直像素数目
 }JpgHeader;
 
-void print_header(BmpHeader header){
+typedef struct JpgHeaderAPPn
+{
+    //U8  Signatue[2] ;   // marker
+    U16 APP0;         //APP0(JFIF application segment)
+    U16 HeaderLength; //size of the header without marker
+    U8 Identifier[5]; //"JFIF\0"
+    U16 Version;      //JFIF version
+
+    //DIB header
+    U8 Unit;       //坐标单位，0没有单位； 1 pixel/inch；2 pixel/cm
+    U16 Xdensity;  //水平像素数目
+    U16 Ydensity;  //垂直像素数目
+    U8 Xthumbnail; //缩略图水平像素数目
+    U8 Ythumbnail; //缩略图垂直像素数目
+} JpgHeaderAPPn;
+
+void print_header(JpgHeader header){
+    printf(" SOI         : %d  \n ", header.SOI);
     printf(" APP0         : %d  \n " , header.APP0        );
     printf(" HeaderLength : %d  \n " , header.HeaderLength);
     printf(" Identifier   : %d  \n " , header.Identifier  );
@@ -37,21 +76,21 @@ void print_header(BmpHeader header){
 }
 
 Mat* read_jpg(char* path){
-    FILE* img_stream = fopen(path, "r");
+    FILE* img_stream = fopen(path, "rb");
     if(img_stream == NULL){
-        fprintf(stderr, "open image filed");
+        fprintf(stderr, "open image failed");
     }
     struct JpgHeader header;
 
-    fseek(img_stream, 2, SEEK_SET); //skip BM
+    //fseek(img_stream, 2, SEEK_SET); //skip BM
     fread(&header, sizeof(struct JpgHeader), 1, img_stream); // read the image header
-    //print_header(header);
+    print_header(header);
 
 
     U16 height = header.Ythumbnail;
     U16 width = header.Xthumbnail;
     U8 image_size = height * width * 3;
-    Mat* img = init_mat(height, width, 0, image_size);
+    Mat* img = init_mat(height, width, 0, 3);
 
     U32 offset = 20;
     fseek(img_stream, offset, SEEK_SET);

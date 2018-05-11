@@ -111,29 +111,53 @@ sift/fast:
 	$(MAKE) -f CMakeFiles/sift.dir/build.make CMakeFiles/sift.dir/build
 .PHONY : sift/fast
 
-bmp.o: bmp.c.o
-.PHONY : bmp.o
+jpeg.o: jpeg.c.o
+.PHONY : jpeg.o
 
 # target to build an object file
-bmp.c.o:
-	$(MAKE) -f CMakeFiles/sift.dir/build.make CMakeFiles/sift.dir/bmp.c.o
-.PHONY : bmp.c.o
+jpeg.c.o:
+	$(MAKE) -f CMakeFiles/sift.dir/build.make CMakeFiles/sift.dir/jpeg.c.o
+.PHONY : jpeg.c.o
 
-bmp.i: bmp.c.i
-.PHONY : bmp.i
+jpeg.i: jpeg.c.i
+.PHONY : jpeg.i
 
 # target to preprocess a source file
-bmp.c.i:
-	$(MAKE) -f CMakeFiles/sift.dir/build.make CMakeFiles/sift.dir/bmp.c.i
-.PHONY : bmp.c.i
+jpeg.c.i:
+	$(MAKE) -f CMakeFiles/sift.dir/build.make CMakeFiles/sift.dir/jpeg.c.i
+.PHONY : jpeg.c.i
 
-bmp.s: bmp.c.s
-.PHONY : bmp.s
+jpeg.s: jpeg.c.s
+.PHONY : jpeg.s
 
 # target to generate assembly for a file
-bmp.c.s:
-	$(MAKE) -f CMakeFiles/sift.dir/build.make CMakeFiles/sift.dir/bmp.c.s
-.PHONY : bmp.c.s
+jpeg.c.s:
+	$(MAKE) -f CMakeFiles/sift.dir/build.make CMakeFiles/sift.dir/jpeg.c.s
+.PHONY : jpeg.c.s
+
+jpg.o: jpg.c.o
+.PHONY : jpg.o
+
+# target to build an object file
+jpg.c.o:
+	$(MAKE) -f CMakeFiles/sift.dir/build.make CMakeFiles/sift.dir/jpg.c.o
+.PHONY : jpg.c.o
+
+jpg.i: jpg.c.i
+.PHONY : jpg.i
+
+# target to preprocess a source file
+jpg.c.i:
+	$(MAKE) -f CMakeFiles/sift.dir/build.make CMakeFiles/sift.dir/jpg.c.i
+.PHONY : jpg.c.i
+
+jpg.s: jpg.c.s
+.PHONY : jpg.s
+
+# target to generate assembly for a file
+jpg.c.s:
+	$(MAKE) -f CMakeFiles/sift.dir/build.make CMakeFiles/sift.dir/jpg.c.s
+.PHONY : jpg.c.s
 
 main.o: main.c.o
 .PHONY : main.o
@@ -240,9 +264,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... sift"
-	@echo "... bmp.o"
-	@echo "... bmp.i"
-	@echo "... bmp.s"
+	@echo "... jpeg.o"
+	@echo "... jpeg.i"
+	@echo "... jpeg.s"
+	@echo "... jpg.o"
+	@echo "... jpg.i"
+	@echo "... jpg.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
