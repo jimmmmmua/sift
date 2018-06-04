@@ -7,7 +7,7 @@
 1. 输入1.bmp与2.bmp, 输出point1.bmp 与 point2.bmp, 中间过程输出level-1到4的尺度空间图
 2. 如果输入为jpg格式的图,请使用jpg2bmp.py 转为bmp格式的图
 
-##编译方法:
+## 编译方法:
 1. 安装cmake
 2. 在终端下输入 cmake .
 3. 在终端下输入 make
