@@ -72,28 +72,28 @@ CMakeFiles/sift.dir/main.c.o.provides: CMakeFiles/sift.dir/main.c.o.requires
 
 CMakeFiles/sift.dir/main.c.o.provides.build: CMakeFiles/sift.dir/main.c.o
 
-CMakeFiles/sift.dir/jpg.c.o: CMakeFiles/sift.dir/flags.make
-CMakeFiles/sift.dir/jpg.c.o: jpg.c
+CMakeFiles/sift.dir/bmp.c.o: CMakeFiles/sift.dir/flags.make
+CMakeFiles/sift.dir/bmp.c.o: bmp.c
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/likewise-open/SENSETIME/xumingchao/Documents/experiments/cv_homework/sift/CMakeFiles $(CMAKE_PROGRESS_2)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/sift.dir/jpg.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/sift.dir/jpg.c.o   -c /home/likewise-open/SENSETIME/xumingchao/Documents/experiments/cv_homework/sift/jpg.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/sift.dir/bmp.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/sift.dir/bmp.c.o   -c /home/likewise-open/SENSETIME/xumingchao/Documents/experiments/cv_homework/sift/bmp.c
 
-CMakeFiles/sift.dir/jpg.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/sift.dir/jpg.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -E /home/likewise-open/SENSETIME/xumingchao/Documents/experiments/cv_homework/sift/jpg.c > CMakeFiles/sift.dir/jpg.c.i
+CMakeFiles/sift.dir/bmp.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/sift.dir/bmp.c.i"
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -E /home/likewise-open/SENSETIME/xumingchao/Documents/experiments/cv_homework/sift/bmp.c > CMakeFiles/sift.dir/bmp.c.i
 
-CMakeFiles/sift.dir/jpg.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/sift.dir/jpg.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -S /home/likewise-open/SENSETIME/xumingchao/Documents/experiments/cv_homework/sift/jpg.c -o CMakeFiles/sift.dir/jpg.c.s
+CMakeFiles/sift.dir/bmp.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/sift.dir/bmp.c.s"
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -S /home/likewise-open/SENSETIME/xumingchao/Documents/experiments/cv_homework/sift/bmp.c -o CMakeFiles/sift.dir/bmp.c.s
 
-CMakeFiles/sift.dir/jpg.c.o.requires:
-.PHONY : CMakeFiles/sift.dir/jpg.c.o.requires
+CMakeFiles/sift.dir/bmp.c.o.requires:
+.PHONY : CMakeFiles/sift.dir/bmp.c.o.requires
 
-CMakeFiles/sift.dir/jpg.c.o.provides: CMakeFiles/sift.dir/jpg.c.o.requires
-	$(MAKE) -f CMakeFiles/sift.dir/build.make CMakeFiles/sift.dir/jpg.c.o.provides.build
-.PHONY : CMakeFiles/sift.dir/jpg.c.o.provides
+CMakeFiles/sift.dir/bmp.c.o.provides: CMakeFiles/sift.dir/bmp.c.o.requires
+	$(MAKE) -f CMakeFiles/sift.dir/build.make CMakeFiles/sift.dir/bmp.c.o.provides.build
+.PHONY : CMakeFiles/sift.dir/bmp.c.o.provides
 
-CMakeFiles/sift.dir/jpg.c.o.provides.build: CMakeFiles/sift.dir/jpg.c.o
+CMakeFiles/sift.dir/bmp.c.o.provides.build: CMakeFiles/sift.dir/bmp.c.o
 
 CMakeFiles/sift.dir/mat.c.o: CMakeFiles/sift.dir/flags.make
 CMakeFiles/sift.dir/mat.c.o: mat.c
@@ -164,47 +164,22 @@ CMakeFiles/sift.dir/type.c.o.provides: CMakeFiles/sift.dir/type.c.o.requires
 
 CMakeFiles/sift.dir/type.c.o.provides.build: CMakeFiles/sift.dir/type.c.o
 
-CMakeFiles/sift.dir/jpeg.c.o: CMakeFiles/sift.dir/flags.make
-CMakeFiles/sift.dir/jpeg.c.o: jpeg.c
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/likewise-open/SENSETIME/xumingchao/Documents/experiments/cv_homework/sift/CMakeFiles $(CMAKE_PROGRESS_6)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/sift.dir/jpeg.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/sift.dir/jpeg.c.o   -c /home/likewise-open/SENSETIME/xumingchao/Documents/experiments/cv_homework/sift/jpeg.c
-
-CMakeFiles/sift.dir/jpeg.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/sift.dir/jpeg.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -E /home/likewise-open/SENSETIME/xumingchao/Documents/experiments/cv_homework/sift/jpeg.c > CMakeFiles/sift.dir/jpeg.c.i
-
-CMakeFiles/sift.dir/jpeg.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/sift.dir/jpeg.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -S /home/likewise-open/SENSETIME/xumingchao/Documents/experiments/cv_homework/sift/jpeg.c -o CMakeFiles/sift.dir/jpeg.c.s
-
-CMakeFiles/sift.dir/jpeg.c.o.requires:
-.PHONY : CMakeFiles/sift.dir/jpeg.c.o.requires
-
-CMakeFiles/sift.dir/jpeg.c.o.provides: CMakeFiles/sift.dir/jpeg.c.o.requires
-	$(MAKE) -f CMakeFiles/sift.dir/build.make CMakeFiles/sift.dir/jpeg.c.o.provides.build
-.PHONY : CMakeFiles/sift.dir/jpeg.c.o.provides
-
-CMakeFiles/sift.dir/jpeg.c.o.provides.build: CMakeFiles/sift.dir/jpeg.c.o
-
 # Object files for target sift
 sift_OBJECTS = \
 "CMakeFiles/sift.dir/main.c.o" \
-"CMakeFiles/sift.dir/jpg.c.o" \
+"CMakeFiles/sift.dir/bmp.c.o" \
 "CMakeFiles/sift.dir/mat.c.o" \
 "CMakeFiles/sift.dir/sift.c.o" \
-"CMakeFiles/sift.dir/type.c.o" \
-"CMakeFiles/sift.dir/jpeg.c.o"
+"CMakeFiles/sift.dir/type.c.o"
 
 # External object files for target sift
 sift_EXTERNAL_OBJECTS =
 
 sift: CMakeFiles/sift.dir/main.c.o
-sift: CMakeFiles/sift.dir/jpg.c.o
+sift: CMakeFiles/sift.dir/bmp.c.o
 sift: CMakeFiles/sift.dir/mat.c.o
 sift: CMakeFiles/sift.dir/sift.c.o
 sift: CMakeFiles/sift.dir/type.c.o
-sift: CMakeFiles/sift.dir/jpeg.c.o
 sift: CMakeFiles/sift.dir/build.make
 sift: CMakeFiles/sift.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking C executable sift"
@@ -215,11 +190,10 @@ CMakeFiles/sift.dir/build: sift
 .PHONY : CMakeFiles/sift.dir/build
 
 CMakeFiles/sift.dir/requires: CMakeFiles/sift.dir/main.c.o.requires
-CMakeFiles/sift.dir/requires: CMakeFiles/sift.dir/jpg.c.o.requires
+CMakeFiles/sift.dir/requires: CMakeFiles/sift.dir/bmp.c.o.requires
 CMakeFiles/sift.dir/requires: CMakeFiles/sift.dir/mat.c.o.requires
 CMakeFiles/sift.dir/requires: CMakeFiles/sift.dir/sift.c.o.requires
 CMakeFiles/sift.dir/requires: CMakeFiles/sift.dir/type.c.o.requires
-CMakeFiles/sift.dir/requires: CMakeFiles/sift.dir/jpeg.c.o.requires
 .PHONY : CMakeFiles/sift.dir/requires
 
 CMakeFiles/sift.dir/clean:
