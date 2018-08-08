@@ -1,20 +1,23 @@
 #include "mat.h"
-#include <math.h>
+#include "type.h"
+#include "stdio.h"
+#include "math.h"
 #include "sift.h"
-#include <stdio.h>
-#include <stdbool.h>
+#include "dector.h"
 #include "bmp.h"
-#define PI 3.14
+#include <stdlib.h>
 
+Mat* vertical_diff(Mat* image){
+    if(image->channels != 1 || image->bytes != Float){
+        fprintf(stderr,"channels or bytes isn't correct");
+    }
 
-Point* init_point(U16 row, U16 col){
-    Point* point = malloc(sizeof(Point));
-    point->col = col;
-    point->row = row;
-}
+    Mat* kernel = init_mat(3,3,0,Float);
+    float* pointer = kernel->buffer;
+    pointer[0] = -1;pointer[1] = -2;pointer[2] = -1;pointer[6] = 1;pointer[7] = 2;pointer[8] = 1;
 
-float gaussian(float sigma, float r){
-   return exp(-pow(r,2) / (2*pow(sigma,2))) / (2*PI*sigma);
+    Mat* res = conv(image, kernel, 1, 1);
+    return res;
 }
 
 Mat* gaussian_kernel(U8 radius, float sigma){
@@ -31,13 +34,18 @@ Mat* gaussian_kernel(U8 radius, float sigma){
             *pointer = gaussian(sigma, r);
         }
     }
-    return kernel;
+
+    Mat* kernel = init_mat(3,3,0,Float);
+    float* pointer = kernel->buffer;
+    pointer[0] = -1;pointer[3] = -2;pointer[6] = -1;pointer[2] = 1;pointer[5] = 2;pointer[8] = 1;
+
+    Mat* res = conv(image, kernel, 1, 1);
+    return res;
 }
-/*check if this point is extreme point*/
-bool check_extreme(Mat* scala_space[],U8 level,U16 row,U16 col){
-    if(level == 0 || level == 3){
-        fprintf(stderr,"check_max level error");
-        return false;
+
+Mat* gradient_abs(Mat* image){
+    if(image->channels != 1 || image->bytes != Float){
+        fprintf(stderr,"channels or bytes isn't correct");
     }
     U8 threshold = 1;
     U8 is_extreme = true;
@@ -57,8 +65,6 @@ bool check_extreme(Mat* scala_space[],U8 level,U16 row,U16 col){
                     is_extreme = false;
             }
         }
-        if(is_extreme == false)
-            break;
     }
     if(is_extreme == false)
         is_extreme = true;
@@ -78,9 +84,17 @@ bool check_extreme(Mat* scala_space[],U8 level,U16 row,U16 col){
         if(is_extreme == false)
             break;
     }
+    Mat* h_diff = horizon_diff(image);
+    Mat* v_diff = vertical_diff(image);
+    U16 height = image->height;
+    U16 width = image->width;
+    Mat* abs_diff = init_mat(height, width, 0, Float);
 
-    return is_extreme;
-}
+    for(U16 row=0;row<height;row++){
+        for(U16 col=0;col<width;col++){
+            float* src1 = locate(h_diff, row, col);
+            float* src2 = locate(v_diff, row, col);
+            float* to = locate(abs_diff, row, col);
 
 List* local_max(Mat** scala_space){
     U16 length = 4;
@@ -97,7 +111,10 @@ List* local_max(Mat** scala_space){
             }
         }
     }
-    return key_points;
+    return abs_diff;
+}
+float main_direction(){
+    return 0;
 }
 
 Mat* get_dog_kernel(U8 radius, float sigma1, float sigma2){
@@ -111,9 +128,6 @@ Mat* get_dog_kernel(U8 radius, float sigma1, float sigma2){
             sum = sum + *pointer;
         }
     }
-    float* mid = locate(kernel, radius, radius);
-    //*mid = *mid - sum;
-    return kernel;
 }
 
 List* Dog(Mat* image){
@@ -129,8 +143,14 @@ List* Dog(Mat* image){
         print_mat(dog_kernel);
         scale_space[k-1] = conv(image, dog_kernel, 1, dog_kernel->height/2); // keep the scale is the same as the origin image
     }
-    List* key_point = local_max(scale_space);
+    return sift;
+}
 
+List* sift_describe(Mat* image, List* key_points){
+    static num = 1;
+    List* sift_list = init_List(sizeof(SiftVector));
+    Mat* abs_diff = gradient_abs(image);
+    Mat* direction_diff= gradient_direction(image);
 
     int i;
     for(i = 0; i < 4; i++){
@@ -140,12 +160,34 @@ List* Dog(Mat* image){
         sprintf(path,"level-%d.bmp",(i+1));
         write_bmp(img, path);
     }
-    return key_point;
+    num++;
+
+    normalize_image(abs_diff);
+    Mat* img = float2uchar(abs_diff);
+    char path[20];
+    sprintf(path,"diff_abs%d.bmp",num);
+    write_bmp(img,path);
+    free_mat(img);
+
+    normalize_image(direction_diff);
+    img = float2uchar(direction_diff);
+    sprintf(path,"direction_diff%d.bmp",num);
+    write_bmp(img,path);
+    free_mat(img);
+    free_mat(abs_diff);
+    free_mat(direction_diff);
+
+    return sift_list;
 }
 
-void plot_points(Mat* color_image, List* key_points){
-    if(color_image->channels != 3){
-        return;
+float vector_dot(SiftVector sift1, SiftVector sift2){
+    float dot_sum = 0;
+    float sum1 = 0;
+    float sum2 = 0;
+    for(U8 i=0;i<128;i++){
+        dot_sum = dot_sum + sift1[i]*sift2[i];
+        sum1 = sum1 + pow(sift1[i],2);
+        sum2 = sum2 + pow(sift2[i],2);
     }
     RGB red;
     red.G = 255;
@@ -164,5 +206,8 @@ void plot_points(Mat* color_image, List* key_points){
             *(to + width) = red;
             *(to - width) = red;
         }
+        push(match_list,match_pair);
+        l1 = l1->next;
     }
+    return match_list;
 }
